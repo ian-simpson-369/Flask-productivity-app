@@ -1,0 +1,8 @@
+i would like to make a flask and pandas integrated web app. for making a schedule and accountability. it would show a customizable grid of stopwatches. 
+that the user could name and set particular amounts of time that each one would take until it turns green. at the bottom of each stopwatch it would show the streak that the person has hit 
+the goal, and at bottom of page it would show a weekly and monthly view with the weekly showing how many stopwatches he filled each day, and the monthly showing each week. 
+the top of the page would show a quote from a Holy mussar book and potential improvements could be custom themes and additional stats/trends over time. 
+as well as seperate user accounts
+
+TODO delete button is broke, stats are inaccurate, logout button, move around stopwatches, simplify(maybe switch to vue
+or something tailwind seems to make the class tags long which is hard to read)

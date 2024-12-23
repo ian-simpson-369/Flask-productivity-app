@@ -1,0 +1,82 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Mussar Quote -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <p class="text-xl text-center text-gray-700 italic">{{ quote }}</p>
+        </div>
+
+        <!--Wake time TODO user can save waking time-->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <p class="text-xl text-center text-gray-700 italic">Target waking time <input type = "time"/></p>
+        </div>
+        
+        <!-- Add stopwatch form-->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <form id="add-stopwatch-form">
+                <label for="stopwatch-name" class="block text-lg font-semibold mb-2">Stopwatch Name:</label>
+                <input type="text" id="stopwatch-name" class="border rounded w-full px-4 py-2 mb-4" required />
+                
+                <label for="target-time" class="block text-lg font-semibold mb-2">Target Time (minutes):</label>
+                <input type="number" id="target-time" class="border rounded w-full px-4 py-2 mb-4" required />
+                
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Add Stopwatch</button>
+            </form>
+        </div>
+
+        <!-- Stopwatch Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {% for stopwatch in stopwatches %}
+            <div class="stopwatch rounded-lg shadow-md p-6" id="stopwatch-{{ stopwatch.id }}">
+                <h3 class="text-lg font-semibold mb-2">{{ stopwatch.name }}</h3>
+                <div class="text-3xl font-bold text-center mb-4 timer">00:00:00</div>
+                <div class="target-time hidden">{{ stopwatch.target_time }}</div>
+                <div class="flex justify-between mb-4">
+                    <button class="start-btn bg-blue-500 text-white px-4 py-2 rounded">Start</button>
+                    <button class="stop-btn bg-red-500 text-white px-4 py-2 rounded hidden">Stop</button>
+                    <button class="delete-btn bg-gray-500 text-white px-4 py-2 rounded">Delete</button>
+                </div>
+                <div class="text-center text-sm">
+                    <p>Target: {{ stopwatch.target_time }} minutes</p>
+                    <p>Current Streak: <span class="streak">0</span> days</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Stats Section -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Weekly Progress</h3>
+                    <canvas id="weekly-stats" class="h-64"></canvas>
+                    <!-- Weekly stats chart will be rendered here -->
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Monthly Progress</h3>
+                    <canvas id="monthly-stats" class="h-64"></canvas>
+                        <!-- Monthly stats chart will be rendered here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!--Bed time TODO implement user can save bed time-->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <p class="text-xl text-center text-gray-700 italic">Target sleeping time <input type = "time"/></p>
+            </div>
+        </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/scriptOne.js') }}"></script>
+</body>
+</html>
